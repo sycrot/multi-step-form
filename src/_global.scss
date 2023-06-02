@@ -1,0 +1,29 @@
+@font-face {
+  font-family:  'Ubuntu-Normal';
+  src: url('./assets/fonts/Ubuntu-Regular.ttf');
+}
+
+@font-face {
+  font-family:  'Ubuntu-Bold';
+  src: url('./assets/fonts/Ubuntu-Bold.ttf');
+}
+
+@font-face {
+  font-family:  'Ubuntu-Medium';
+  src: url('./assets/fonts/Ubuntu-Medium.ttf');
+}
+
+* {
+  font-family: 'Ubunto-Normal', sans-serif;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: $magnolia;
+}
+
+p {
+  font-size: 16px;
+  color: $cool-gray;
+}
