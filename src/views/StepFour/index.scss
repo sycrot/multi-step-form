@@ -18,10 +18,12 @@
           margin: 4px 0 !important;
         }
 
-        button {
+        .change {
           font-size: 14px;
-          text-decoration: underline;
-          color: $cool-gray;
+          appearance: none;
+          outline: none !important;
+          border: none !important;
+          
           background: none;
           padding: 0;
           margin: 0;
@@ -29,7 +31,17 @@
           cursor: pointer;
 
           &:hover {
-            color: $purplish-blue;
+            &:after {
+              content: 'Change';
+              color: $purplish-blue;
+              text-decoration: underline;
+            }
+          }
+
+          &:after {
+            content: 'Change';
+            color: $cool-gray;
+            text-decoration: underline;
           }
         }
       }
@@ -71,6 +83,7 @@
 
     p {
       font-size: 14px;
+      margin: 0 !important;
     }
 
     h4 {

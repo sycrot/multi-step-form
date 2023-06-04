@@ -1,0 +1,76 @@
+.steps {
+  display: flex;
+  justify-content: center;
+  background: url('../../assets/images/bg-sidebar-mobile.svg') no-repeat;
+  background-size: 100%;
+  padding: 30px 20px;
+  padding-bottom: 80px;
+
+  @media (min-width: $breakpoint-md) {
+    background: url('../../assets/images/bg-sidebar-desktop.png') no-repeat top/100% 100%;
+    width: 100%;
+    max-width: 280px;
+    padding: 30px 20px;
+    flex-direction: column;
+    justify-content: start;
+    border-radius: 10px;
+  }
+
+  .step-box {
+    margin: 0 8px;
+    cursor: pointer;
+
+    @media (min-width: $breakpoint-md) {
+      margin: 14px;
+      display: flex;
+      align-items: center;
+    }
+
+    .step-button {
+      width: 20px;
+      height: 20px;
+      color: #fff;
+      font-weight: bold;
+      background: transparent;
+      border-radius: 50%;
+      padding: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #fff;
+
+      @media (min-width: $breakpoint-md) {
+        margin-right: 14px;
+      }
+    }
+
+    &.active {
+      .step-button {
+        color: $marine-blue;
+        background: $light-blue;
+        border: 1px solid $light-blue;
+      }
+    }
+
+    .step-info {
+      display: none;
+
+      span {
+        font-size: 12px;
+        text-transform: uppercase;
+        color: $light-gray;
+      }
+
+      p {
+        font-size: 14px;
+        text-transform: uppercase;
+        color: #fff;
+        margin-top: 4px;
+      }
+
+      @media (min-width: $breakpoint-md) {
+        display: block;
+      }
+    }
+  }
+}
