@@ -88,6 +88,10 @@
         border-radius: 10px;
         cursor: pointer;
 
+        &:hover {
+          border: 1px solid $purplish-blue;
+        }
+
         &:checked {
           border: 1px solid $purplish-blue;
           background: hsla(243, 100%, 62%, 0.07);

@@ -67,6 +67,7 @@
         display: flex;
         justify-content: space-between;
         font-size: 14px;
+        margin: 14px 0 0 0!important;
 
         span {
           color: $marine-blue;
@@ -89,28 +90,6 @@
     h4 {
       font-size: 16px;
       color: $purplish-blue;
-    }
-  }
-
-  .button-confirm {
-    background: $purplish-blue;
-    padding: 10px 14px;
-    font-size: 14px;
-    border-radius: 4px;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    margin-left: auto;
-
-    @media (min-width: $breakpoint-md) {
-      padding: 12px 22px;
-      position: absolute;
-      bottom: -40px;
-      right: 0;
-    }
-
-    &:hover {
-      background: hsl(243, 100%, 65%);
     }
   }
 }

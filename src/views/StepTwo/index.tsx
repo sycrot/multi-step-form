@@ -1,11 +1,13 @@
 import * as yup from "yup";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Formik, Form, Field } from "formik";
-import { FormContext } from "../../services/Context";
+import { FormContext } from "../../common/Context";
 import { ContextType } from "../../types/ContextType";
+import { ButtonsContainer } from "../../components/ButtonsContainer";
+import { onChange } from "../../common/onChange";
+import { handlePriceService } from "../../common/PriceService";
 
 export const StepTwo = () => {
-  const [monthlyOrYearly, setMonthlyOrYearly] = useState<string>('monthly');
   const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext) as ContextType;
 
   const ValidationSchema = yup.object().shape({
@@ -13,13 +15,9 @@ export const StepTwo = () => {
     monthlyOrYearly: yup.string().required()
   })
 
-  const handleMonthlyYearly = () => {
-    setMonthlyOrYearly(monthlyOrYearly === 'yearly' ? 'monthly' : 'yearly')
-  }
-
   return (
     <div className="form-step-two form-item">
-      <Formik initialValues={{ plan: '', monthlyOrYearly: 'monthly' }} validationSchema={ValidationSchema} onSubmit={(values) => {
+      <Formik initialValues={{ plan: formData.plan || '', monthlyOrYearly: formData.monthlyOrYearly || 'monthly' }} validationSchema={ValidationSchema} onSubmit={(values) => {
         const data = { ...formData, ...values }
         setFormData(data)
         setActiveStepIndex(activeStepIndex + 1)
@@ -31,38 +29,35 @@ export const StepTwo = () => {
           <div className="plans-container">
             <div className="box-check-plan">
               <div className="label arcade">
-                <label htmlFor="arcade">Arcade<p>$9/mo</p>{monthlyOrYearly === 'yearly' && <span className="yearly-label">2 months free</span>}</label>
+                <label htmlFor="arcade">Arcade<p>{handlePriceService(9, formData)}</p>{formData.monthlyOrYearly === 'yearly' && <span className="yearly-label">2 months free</span>}</label>
               </div>
-              <Field id="arcade" type="radio" name="plan" value="arcade" />
+              <Field id="arcade" type="radio" name="plan" value="arcade" onClick={(e:any) => onChange(e, formData, setFormData)}/>
             </div>
             <div className="box-check-plan">
               <div className="label advanced">
-                <label htmlFor="advanced">Advanced<p>$12/mo</p>{monthlyOrYearly === 'yearly' && <span className="yearly-label">2 months free</span>}</label>
+                <label htmlFor="advanced">Advanced<p>{handlePriceService(12, formData)}</p>{formData.monthlyOrYearly === 'yearly' && <span className="yearly-label">2 months free</span>}</label>
               </div>
-              <Field id="advanced" type="radio" name="plan" value="advanced" />
+              <Field id="advanced" type="radio" name="plan" value="advanced" onClick={(e:any) => onChange(e, formData, setFormData)}/>
             </div>
             <div className="box-check-plan">
               <div className="label pro">
-                <label htmlFor="pro">Pro<p>$15/mo</p>{monthlyOrYearly === 'yearly' && <span className="yearly-label">2 months free</span>}</label>
+                <label htmlFor="pro">Pro<p>{handlePriceService(15, formData)}</p>{formData.monthlyOrYearly === 'yearly' && <span className="yearly-label">2 months free</span>}</label>
               </div>
-              <Field id="pro" type="radio" name="plan" value="pro" />
+              <Field id="pro" type="radio" name="plan" value="pro" onClick={(e:any) => onChange(e, formData, setFormData)}/>
             </div>
           </div>
 
           <div className="select-monthly-yearly">
-            <label htmlFor="monthly" className={`${monthlyOrYearly === 'monthly' ? 'active' : ''}`}>Monthly</label>
-            <div className={`input-key ${monthlyOrYearly === 'yearly' ? 'circle-right' : 'circle-left'}`}>
-              <Field id="monthlyYearly" name="monthlyOrYearly" type="radio" value="monthly" className={monthlyOrYearly === 'monthly' ? 'd-none' : ''} onClick={handleMonthlyYearly}/>
-              <Field id="monthlyYearly" name="monthlyOrYearly" type="radio" value="yearly" className={monthlyOrYearly === 'yearly' ? 'd-none' : ''} onClick={handleMonthlyYearly}/>
+            <label htmlFor="monthly" className={`${formData.monthlyOrYearly === 'monthly' ? 'active' : ''}`}>Monthly</label>
+            <div className={`input-key ${formData.monthlyOrYearly === 'yearly' ? 'circle-right' : 'circle-left'}`}>
+              <Field id="monthlyYearly" name="monthlyOrYearly" type="radio" value="monthly" className={formData.monthlyOrYearly === 'monthly' ? 'd-none' : ''} onClick={(e:any) => onChange(e, formData, setFormData)} />
+              <Field id="monthlyYearly" name="monthlyOrYearly" type="radio" value="yearly" className={formData.monthlyOrYearly === 'yearly' ? 'd-none' : ''} onClick={(e:any) => onChange(e, formData, setFormData)} />
             </div>
 
-            <label htmlFor="monthly" className={`${monthlyOrYearly === 'yearly' ? 'active' : ''}`}>Yearly</label>
+            <label htmlFor="monthly" className={`${formData.monthlyOrYearly === 'yearly' ? 'active' : ''}`}>Yearly</label>
           </div>
 
-          <div className="button-next-container">
-            <button className="button-back">Go Back</button>
-            <button type="submit" className="button-next">Next Step</button>
-          </div>
+          <ButtonsContainer />
         </Form>
       </Formik>
 

@@ -121,8 +121,7 @@
             margin-top: 65px;
           }
 
-          .button-next {
-            background: $marine-blue;
+          .button-submit {
             padding: 10px 14px;
             font-size: 14px;
             border-radius: 4px;
@@ -137,9 +136,21 @@
               bottom: -40px;
               right: 0;
             }
+          }
+
+          .button-next {
+            background: $marine-blue;
 
             &:hover {
               background: hsl(213, 96%, 22%);
+            }
+          }
+
+          .button-confirm {
+            background: $purplish-blue;
+        
+            &:hover {
+              background: hsl(243, 100%, 65%);
             }
           }
 

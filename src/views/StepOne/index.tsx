@@ -1,8 +1,10 @@
 import * as yup from "yup";
 import { useContext } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { FormContext } from "../../services/Context";
+import { FormContext } from "../../common/Context";
 import { ContextType } from "../../types/ContextType";
+import { ButtonsContainer } from "../../components/ButtonsContainer";
+import { onChange } from "../../common/onChange";
 
 export const StepOne = () => {
   const { activeStepIndex, setActiveStepIndex, formData, setFormData } = useContext(FormContext) as ContextType;
@@ -13,10 +15,12 @@ export const StepOne = () => {
     phone: yup.string().required(`This field is required`)
   })
 
+  
+
 
   return (
     <div className="form-step-one form-item">
-      <Formik initialValues={{ name: '', email: '', phone: '' }} validationSchema={ValidationSchema} onSubmit={(values) => {
+      <Formik initialValues={{ name: formData.name || '', email: formData.email || '', phone: formData.phone || '' }} validationSchema={ValidationSchema} onSubmit={(values) => {
         const data = { ...formData, ...values }
         setFormData(data)
         setActiveStepIndex(activeStepIndex + 1)
@@ -28,22 +32,21 @@ export const StepOne = () => {
             <label htmlFor="name">Name</label>
             <span><ErrorMessage name="name" /></span>
           </div>
-          <Field name="name" placeholder="e.g. Stephen King" />
+          <Field name="name" placeholder="e.g. Stephen King" onKeyUp={(e: any) => onChange(e, formData, setFormData)}/>
 
           <div className="label">
             <label htmlFor="email">Email Address</label>
             <span><ErrorMessage name="email" /></span>
           </div>
-          <Field name="email" placeholder="e.g. Stephen King" />
+          <Field name="email" placeholder="e.g. Stephen King" onKeyUp={(e: any) => onChange(e, formData, setFormData)} />
 
           <div className="label">
             <label htmlFor="phone">Phone Number</label>
             <span><ErrorMessage name="phone" /></span>
           </div>
-          <Field name="phone" placeholder="e.g. Stephen King" />
-          <div className="button-next-container">
-            <button type="submit" className="button-next">Next Step</button>
-          </div>
+          <Field name="phone" placeholder="e.g. Stephen King" onKeyUp={(e: any) => onChange(e, formData, setFormData)} />
+          
+          <ButtonsContainer />
 
         </Form>
       </Formik>

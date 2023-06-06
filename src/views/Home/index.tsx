@@ -4,8 +4,9 @@ import { StepThree } from "../StepThree";
 import { StepFour } from "../StepFour";
 import IconThank from '../../assets/images/icon-thank-you.svg'
 import { StepBar } from "../../components/Steps";
-import { useState } from "react";
-import { FormContext } from "../../services/Context";
+import { useEffect, useState } from "react";
+import { FormContext } from "../../common/Context";
+import { FormType } from "../../types/FormType";
 
 const Step = (activeStepIndex: number) => {
   switch (activeStepIndex) {
@@ -31,7 +32,17 @@ const Step = (activeStepIndex: number) => {
 }
 export const Home = () => {
   const [activeStepIndex, setActiveStepIndex] = useState(0)
-  const [formData, setFormData] = useState<string[]>([''])
+  const [formData, setFormData] = useState<FormType>({name: '', email: '', phone: '', plan: '', monthlyOrYearly: 'monthly', addOns: []})
+
+  useEffect(() => {
+    if (activeStepIndex === 4) {
+      setFormData({name: '', email: '', phone: '', plan: '', monthlyOrYearly: 'monthly', addOns: []})
+
+      setTimeout(() => {
+        setActiveStepIndex(0)
+      }, 10000)
+    }
+  }, [activeStepIndex])
 
   return (
     <FormContext.Provider value={{ activeStepIndex, setActiveStepIndex, formData, setFormData }}>
