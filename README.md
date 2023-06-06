@@ -1,3 +1,6 @@
+## Link to site preview
+[Multi Step Form with Yup & Formik - Preview](https://multi-step-form-five-rose.vercel.app/)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
